@@ -20,7 +20,7 @@ import Data.List ( intercalate ,intersperse)
 
 fetchJSONVuelos :: String -> IO BS.ByteString 
 fetchJSONVuelos  codigoIATA = do
-  let api = "http://api.aviationstack.com/v1/flights?access_key=3a95b782896d1dd474c5859f4a750d51&limit=10&flight_status=scheduled&dep_iata="++codigoIATA
+  let api = "YourAPI"++codigoIATA
   request <- parseRequest api
   res <- httpBS request
   return (getResponseBody res)
@@ -28,7 +28,7 @@ fetchJSONVuelos  codigoIATA = do
 
 fetchJSONClima :: String -> IO BS.ByteString 
 fetchJSONClima  ciudad = do
-  let api = "http://api.weatherstack.com/current?access_key=4437bebe1bf7d21e2783dae675d2d470&query=" ++ciudad
+  let api = "YourAPI" ++ciudad
   request <- parseRequest api
   res <- httpBS request
   return (getResponseBody res)
@@ -50,7 +50,7 @@ main = do
     Nothing   -> TIO.putStrLn "No se pudo encontrar la temperatura :("
     Just temperature -> TIO.putStrLn $ "El clima es de: " <> intToText temperature <> " grados" 
   putStrLn "¿Desea conocer los vuelos de salida mediante código iata? \n [S/N]"
-  putStrLn "Si desea consultar los códigos iata consulte: \n http://api.aviationstack.com/v1/cities?access_key=3a95b782896d1dd474c5859f4a750d51"
+  putStrLn "Si desea consultar los códigos iata consulte: \n http://api.aviationstack.com/v1/cities?access_key=YourKEY"
   confirmacion <- getLine
   if confirmacion == "S"
     then do
